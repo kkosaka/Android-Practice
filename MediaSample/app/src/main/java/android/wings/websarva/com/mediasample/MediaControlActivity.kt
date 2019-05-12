@@ -1,12 +1,10 @@
 package android.wings.websarva.com.mediasample
 
 import android.media.MediaPlayer
-import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
 import android.widget.Switch
-import java.io.IOException
 import android.os.*
 
 
@@ -28,26 +26,7 @@ class MediaControlActivity : AppCompatActivity() {
         _btForward = findViewById(R.id.btForward)
 
         _player = MediaPlayer()
-        // 音声ファイルのURI
-        val mediaFileUriStr = "android.resource://$packageName/${R.raw.mountain_stream}"
-        // URIStrをもとに、URIオブジェクトを生成
-        val mediaFileUri = Uri.parse(mediaFileUriStr)
-        try{
-            _player.setDataSource(this, mediaFileUri)
-            // 非同期でのメディア再生準備が完了した際のリスナを設定
-            _player.setOnPreparedListener {
-                _btPlay.isEnabled = true
-                _btBack.isEnabled = true
-                _btForward.isEnabled = true
-            }
-            // メディア再生が終了した際のリスナの設定
-            _player.setOnCompletionListener {
-                _btPlay.setText(R.string.bt_play_play)
-            }
-            _player.prepareAsync()
-        }catch (e :IOException){
-            e.printStackTrace()
-        }
+
 
         // スイッチを取得
         val loopSwitch: Switch = findViewById(R.id.swLoop)
